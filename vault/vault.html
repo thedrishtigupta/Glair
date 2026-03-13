@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vault.css">
+</head>
+<body>
+
+<!-- HOME -->
+<div class="screen active" id="screen-home">
+  <div class="app-header">
+    <div class="logo">vault<span>.</span></div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input class="search-input" id="search-input" placeholder="Search folders or notes…" oninput="handleSearch(this.value)">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="folders-grid" id="folders-grid"></div>
+</div>
+
+<!-- FOLDER VIEW -->
+<div class="screen" id="screen-folder">
+  <div class="folder-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="folder-title-block">
+      <div class="folder-emoji-title">
+        <span class="folder-big-emoji" id="folder-view-emoji"></span>
+        <span class="folder-title" id="folder-view-title"></span>
+      </div>
+      <div class="folder-subtitle" id="folder-view-count"></div>
+    </div>
+    <div style="margin-top: 6px;">
+      <button class="add-note-btn" onclick="openNewNote()">+ new note</button>
+    </div>
+  </div>
+  <div class="notes-list" id="notes-list"></div>
+</div>
+
+<!-- NOTE EDITOR -->
+<div class="screen" id="screen-editor">
+  <div class="note-editor-header">
+    <button class="back-btn" onclick="goToFolder()">←</button>
+    <span class="editor-folder-label" id="editor-folder-label"></span>
+    <span class="editor-sep">·</span>
+    <span class="editor-folder-label" id="editor-mode-label" style="color:var(--muted)"></span>
+  </div>
+  <div class="note-editor-body">
+    <input class="editor-title" id="editor-title" placeholder="Give this note a title…">
+    <textarea class="editor-body" id="editor-body" placeholder="Write anything…"></textarea>
+    <div class="editor-footer">
+      <button class="btn-secondary" onclick="goToFolder()">Discard</button>
+      <button class="btn-primary" onclick="saveNote()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: New Folder -->
+<div class="modal-overlay" id="modal-new-folder" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-title">New folder</div>
+    <div class="modal-label">Folder name</div>
+    <input class="modal-input" id="new-folder-name" placeholder="e.g. Catchy movie quotes">
+    <div class="modal-label">Pick an emoji</div>
+    <div class="emoji-picker" id="emoji-picker"></div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="document.getElementById('modal-new-folder').classList.remove('open')">Cancel</button>
+      <button class="btn-primary" onclick="createFolder()">Create</button>
+    </div>
+  </div>
+</div>
+
+<script src="vault.js"></script>
+</body>
+</html>
