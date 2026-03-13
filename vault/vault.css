@@ -499,3 +499,138 @@ padding: 60px 0;
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
+
+
+/* ── FOLDER MENU ── */
+.folder-menu-wrap { position: relative; }
+.folder-menu-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  transition: all 0.15s;
+  opacity: 0;
+  line-height: 1;
+}
+.folder-card:hover .folder-menu-btn { opacity: 1; }
+.folder-menu-btn:hover { background: var(--surface2); color: var(--text); }
+.folder-menu {
+  display: none;
+  position: absolute;
+  right: 0; top: calc(100% + 4px);
+  background: var(--surface2);
+  border: 1px solid var(--border-hover);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 50;
+  min-width: 140px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.folder-menu.open { display: block; }
+.folder-menu-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+  color: var(--text);
+  white-space: nowrap;
+}
+.folder-menu-item:hover { background: var(--border); }
+.folder-menu-item.danger { color: var(--red); }
+
+/* ── NOTE ACTIONS ── */
+.note-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+.note-card:hover .note-actions { opacity: 1; }
+.note-action-btn {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 5px;
+  transition: background 0.15s;
+  line-height: 1;
+}
+.note-action-btn:hover { background: var(--surface2); }
+.note-action-btn.danger:hover { background: rgba(224,82,82,0.15); }
+
+/* ── RICH TEXT EDITOR ── */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.toolbar-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  line-height: 1;
+}
+.toolbar-btn:hover { background: var(--surface2); color: var(--text); }
+.toolbar-btn.active { background: var(--accent-dim); color: var(--accent); }
+.toolbar-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+/* editor-body is now a div, not textarea */
+.editor-body {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  flex: 1;
+  min-height: 260px;
+  width: 100%;
+  overflow-y: auto;
+}
+.editor-body:empty::before {
+  content: attr(placeholder);
+  color: var(--muted);
+  pointer-events: none;
+}
+.editor-body h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; margin: 10px 0 4px; color: var(--text); }
+.editor-body ol, .editor-body ul { padding-left: 22px; margin: 6px 0; }
+.editor-body li { margin: 3px 0; }
+.editor-body b, .editor-body strong { color: var(--text); font-weight: 600; }
+.editor-body i, .editor-body em { font-style: italic; }
+.editor-body u { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── CONFIRM MODAL ── */
+.btn-danger {
+  background: var(--red);
+  border: 1px solid var(--red);
+  color: #fff;
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-danger:hover { opacity: 0.85; }

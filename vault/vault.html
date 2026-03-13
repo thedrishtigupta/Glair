@@ -33,7 +33,7 @@
       </div>
       <div class="folder-subtitle" id="folder-view-count"></div>
     </div>
-    <div style="margin-top: 6px;">
+    <div style="margin-top:6px; display:flex; gap:8px;">
       <button class="add-note-btn" onclick="openNewNote()">+ new note</button>
     </div>
   </div>
@@ -50,7 +50,24 @@
   </div>
   <div class="note-editor-body">
     <input class="editor-title" id="editor-title" placeholder="Give this note a title…">
-    <textarea class="editor-body" id="editor-body" placeholder="Write anything…"></textarea>
+
+    <!-- Toolbar -->
+    <div class="editor-toolbar">
+      <button class="toolbar-btn" data-cmd="bold" onclick="format('bold')" title="Bold"><b>B</b></button>
+      <button class="toolbar-btn" data-cmd="italic" onclick="format('italic')" title="Italic"><i>I</i></button>
+      <button class="toolbar-btn" data-cmd="underline" onclick="format('underline')" title="Underline"><u>U</u></button>
+      <div class="toolbar-sep"></div>
+      <button class="toolbar-btn" onclick="insertList('ol')" title="Numbered list">1.</button>
+      <button class="toolbar-btn" onclick="insertList('ul')" title="Bullet list">•</button>
+      <div class="toolbar-sep"></div>
+      <button class="toolbar-btn" onclick="format('formatBlock', 'h3')" title="Heading">H</button>
+      <button class="toolbar-btn" onclick="format('formatBlock', 'p')" title="Paragraph">¶</button>
+      <div class="toolbar-sep"></div>
+      <button class="toolbar-btn" onclick="format('removeFormat')" title="Clear formatting">✕</button>
+    </div>
+
+    <div class="editor-body" id="editor-body" contenteditable="true" placeholder="Write anything…"></div>
+
     <div class="editor-footer">
       <button class="btn-secondary" onclick="goToFolder()">Discard</button>
       <button class="btn-primary" onclick="saveNote()">Save</button>
@@ -58,17 +75,29 @@
   </div>
 </div>
 
-<!-- MODAL: New Folder -->
-<div class="modal-overlay" id="modal-new-folder" onclick="closeModal(event)">
+<!-- MODAL: Folder (create + edit) -->
+<div class="modal-overlay" id="modal-folder" onclick="closeModal(event)">
   <div class="modal">
-    <div class="modal-title">New folder</div>
+    <div class="modal-title" id="modal-folder-title">New folder</div>
     <div class="modal-label">Folder name</div>
-    <input class="modal-input" id="new-folder-name" placeholder="e.g. Catchy movie quotes">
+    <input class="modal-input" id="folder-name-input" placeholder="e.g. Catchy movie quotes">
     <div class="modal-label">Pick an emoji</div>
     <div class="emoji-picker" id="emoji-picker"></div>
     <div class="modal-footer">
-      <button class="btn-secondary" onclick="document.getElementById('modal-new-folder').classList.remove('open')">Cancel</button>
-      <button class="btn-primary" onclick="createFolder()">Create</button>
+      <button class="btn-secondary" onclick="closeFolderModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveFolder()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Confirm delete -->
+<div class="modal-overlay" id="modal-confirm" onclick="closeModal(event)">
+  <div class="modal" style="max-width:340px">
+    <div class="modal-title">Are you sure?</div>
+    <p id="confirm-msg" style="font-size:13px; color:var(--muted); margin-bottom:24px; line-height:1.6"></p>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+      <button class="btn-danger" id="confirm-action">Delete</button>
     </div>
   </div>
 </div>
