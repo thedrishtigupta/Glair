@@ -28,7 +28,7 @@ app.post('/folders', async (req, res) => {
 app.put('/folders/:id', async (req, res) => {
   try {
     const { name, emoji, gradient } = req.body;
-    res.json(await Folder.findByIdAndUpdate(req.params.id, { name, emoji, gradient }, { new: true }));
+    res.json(await Folder.findByIdAndUpdate(req.params.id, { name, emoji, gradient }, { returnDocument: 'after' }));
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
